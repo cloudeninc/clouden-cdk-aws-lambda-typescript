@@ -6,7 +6,7 @@ Released under the MIT license.
 
 ## Overview
 
-This is a drop-in wrapper replacement for the AWS CDK Lambda Code asset object to add TypeScript support for Lambda Functions
+This is a drop-in wrapper replacement for the [AWS CDK](https://github.com/aws/aws-cdk) Lambda Code asset object to add TypeScript support for Lambda Functions
 
 When using this wrapper, the source asset path is first compiled as TypeScript and the results are saved in
 new deploy directory (.deploy), which is then deployed using the standard AWS CDK Lambda Code object.
