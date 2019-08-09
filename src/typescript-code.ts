@@ -73,8 +73,6 @@ export class TypeScriptAssetCode extends AssetCode {
 
     if (newPackageData && (newPackageData !== oldPackageData || newPackageLockData !== oldPackageLockData)) {
       // We have a package.json, and either package.json or package-lock.json has changed since last build, or no build done yet
-      if (newPackageData !== oldPackageData) console.log('PACKAGE DATA CHANGED')
-      if (newPackageLockData !== oldPackageLockData) console.log('PACKAGE LOCK DATA CHANGED')
       fs.writeFileSync(pathModule.join(this.path, 'package-lock.json'), newPackageLockData, 'utf8')
       fs.writeFileSync(pathModule.join(this.path, 'package.json'), newPackageData, 'utf8')
 
