@@ -41,7 +41,7 @@ export class TypeScriptAssetCode extends AssetCode {
     typeScriptAlreadyBuilt.push(this.typeScriptSourcePath)
 
     // Run the TypeScript compiler
-    const tscChild = child_process.spawnSync(pathModule.join(__dirname, '..', 'node_modules', '.bin', 'tsc'), ['--outDir', this.path], {
+    const tscChild = child_process.spawnSync('npx', ['tsc', '--outDir', this.path], {
       cwd: this.typeScriptSourcePath,
       stdio: 'inherit',
     })

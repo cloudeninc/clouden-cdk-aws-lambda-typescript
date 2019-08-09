@@ -23,7 +23,7 @@ The path that you provide should include at least a package.json file and a tsco
 
 ```typescript
 import { Function } from '@aws-cdk/aws-lambda'
-import { TypeScriptCode } from 'clouden-cdk-typescript-code'
+import { TypeScriptCode } from '@clouden-cdk/aws-lambda-typescript'
 
 const lambdaFunction = new Function(this, 'TestFunction', {
   functionName: 'test-function',
