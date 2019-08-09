@@ -33,7 +33,7 @@ const lambdaFunction = new Function(this, 'TestFunction', {
 })
 ```
 
-Here is an example tsconfig.json file that we use in Clouden projects:
+Here is an example tsconfig.json file that we use in Clouden projects like [webcat.fi](https://webcat.fi):
 
 ```json
 {
