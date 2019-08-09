@@ -63,11 +63,18 @@ export class TypeScriptAssetCode extends AssetCode {
 
     // Run NPM package install so that the Lambda function gets all dependencies - unless we've already run it
 
+    // Ensure the deploy path exists
+    try {
+      fs.mkdirSync(this.path)
+    } catch (err) {
+      // ignore errors
+    }
+
     // New versions in source path
     const newPackageLockData = readFileSyncOrNull(pathModule.join(this.typeScriptSourcePath, 'package-lock.json'), 'utf8')
     const newPackageData = readFileSyncOrNull(pathModule.join(this.typeScriptSourcePath, 'package.json'), 'utf8')
 
-    // Old versions in build path (if any)
+    // Old versions in deploy path (if any)
     const oldPackageLockData = readFileSyncOrNull(pathModule.join(this.path, 'package-lock.json'), 'utf8')
     const oldPackageData = readFileSyncOrNull(pathModule.join(this.path, 'package.json'), 'utf8')
 

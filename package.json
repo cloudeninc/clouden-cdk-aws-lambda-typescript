@@ -1,6 +1,6 @@
 {
   "name": "@clouden-cdk/aws-lambda-typescript",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "private": false,
   "description": "TypeScript Build Step for AWS CDK Lambda Functions",
   "main": "lib/typescript-code.js",
