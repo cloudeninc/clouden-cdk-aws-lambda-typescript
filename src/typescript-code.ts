@@ -40,9 +40,16 @@ export class TypeScriptAssetCode extends AssetCode {
     }
     typeScriptAlreadyBuilt.push(this.typeScriptSourcePath)
 
-    // Run the TypeScript compiler
-    const tscChild = child_process.spawnSync('npx', ['tsc', '--outDir', this.path], {
-      cwd: this.typeScriptSourcePath,
+    // Ensure the deploy path exists
+    try {
+      fs.mkdirSync(this.path)
+    } catch (err) {
+      // ignore errors
+    }
+
+    // Run the TypeScript compiler in our own module path, so that our own dependency is used
+    const tscChild = child_process.spawnSync('npx', ['tsc', '--project', this.typeScriptSourcePath, '--outDir', this.path], {
+      cwd: __dirname,
       stdio: 'inherit',
     })
     if (tscChild.error) {
@@ -62,13 +69,6 @@ export class TypeScriptAssetCode extends AssetCode {
     }
 
     // Run NPM package install so that the Lambda function gets all dependencies - unless we've already run it
-
-    // Ensure the deploy path exists
-    try {
-      fs.mkdirSync(this.path)
-    } catch (err) {
-      // ignore errors
-    }
 
     // New versions in source path
     const newPackageLockData = readFileSyncOrNull(pathModule.join(this.typeScriptSourcePath, 'package-lock.json'), 'utf8')
