@@ -17,9 +17,9 @@ new deploy directory (.deploy), which is then deployed using the standard AWS CD
 
 ## Usage
 
-Use TypeScriptCode.asset() as a parameter to the code property when creating a Lambda Function.
+Use TypeScriptCode.asset('path/to/lambda-source-code') when creating a Lambda Function.
 
-The path that you provide to asset() should include a package.json file and a tsconfig.json file.
+The path that you provide should include at least a package.json file and a tsconfig.json file.
 
 ```typescript
 import { Function } from '@aws-cdk/aws-lambda'
@@ -31,6 +31,35 @@ const lambdaFunction = new Function(this, 'TestFunction', {
   handler: 'handler.default',
   runtime: lambda.Runtime.NODEJS_10_X,
 })
+```
+
+Here is an example tsconfig.json file that we use in Clouden projects:
+
+```json
+{
+  "compilerOptions": {
+    "target":"ES2017",
+    "module": "commonjs",
+    "lib": ["es2016", "es2017.object", "es2017.string", "esnext.asynciterable"],
+    "declaration": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": false,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "rootDir": "."
+  }
+}
 ```
 
 ## Notes
