@@ -79,7 +79,7 @@ export class TypeScriptAssetCode extends AssetCode {
       fs.writeFileSync(pathModule.join(this.path, 'package.json'), newPackageData, 'utf8')
 
       // Execute npm install
-      const npmChild = child_process.spawnSync('npm', ['install'], {
+      const npmChild = child_process.spawnSync('npm', ['install', '--production'], {
         cwd: this.path,
         stdio: 'inherit',
       })
