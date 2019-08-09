@@ -1,7 +1,7 @@
 {
   "name": "@clouden-cdk/aws-lambda-typescript",
   "version": "0.0.1",
-  "description": "Clouden TypeScript Build Step for AWS CDK Lambda Functions",
+  "description": "TypeScript Build Step for AWS CDK Lambda Functions",
   "main": "lib/typescript-code.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

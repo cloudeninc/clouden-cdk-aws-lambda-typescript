@@ -1,4 +1,4 @@
-# Clouden TypeScript Build Step for AWS CDK Lambda Functions
+# TypeScript Build Step for AWS CDK Lambda Functions
 
 Copyright (C) Clouden Oy 2019, author Kenneth Falck <kennu@clouden.net>.
 
