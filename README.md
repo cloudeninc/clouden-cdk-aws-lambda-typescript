@@ -14,7 +14,7 @@ new deploy directory (.deploy), which is then deployed using the standard AWS CD
 The TypeScript build involves two steps:
 
 1. Run tsc to build the files in the source path and save output to the deploy path.
-2. Copy package.json and package-lock.json from the source path to the deploy path and run npm install in the deploy path.
+2. Copy package.json and package-lock.json from the source path to the deploy path and run npm install there.
 
 The end result of these steps is that the deploy path contains everything needed to deploy the Lambda function.
 
