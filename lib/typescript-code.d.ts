@@ -12,6 +12,6 @@ export declare abstract class TypeScriptCode extends Code {
 export declare class TypeScriptAssetCode extends AssetCode {
     private typeScriptSourcePath;
     constructor(path: string);
-    bind(construct: Construct): void;
+    bind(construct: Construct): import("@aws-cdk/aws-lambda").CodeConfig;
     private typeScriptBuild;
 }
