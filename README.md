@@ -4,6 +4,8 @@ Copyright (C) Clouden Oy 2019, author Kenneth Falck <kennu@clouden.net>.
 
 Released under the MIT license.
 
+Versioning indicates compatibility with AWS CDK major and minor versions. 1.5.x will be compatible with AWS CDK 1.5.x and so on.
+
 ## Overview
 
 This is a drop-in wrapper replacement for the [AWS CDK](https://github.com/aws/aws-cdk) Lambda Code asset object to add TypeScript support for Lambda Functions
