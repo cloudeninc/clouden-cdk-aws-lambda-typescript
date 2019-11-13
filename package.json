@@ -19,6 +19,7 @@
     "aws-cdk": "^1.6.1"
   },
   "dependencies": {
+    "recursive-readdir": "^2.2.2",
     "typescript": "^3.6.2"
   }
 }
