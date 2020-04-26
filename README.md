@@ -1,10 +1,12 @@
 # TypeScript Build Step for AWS CDK Lambda Functions
 
-Copyright (C) Clouden Oy 2019, author Kenneth Falck <kennu@clouden.net>.
+Copyright (C) Clouden Oy 2019-2020, author Kenneth Falck <kennu@clouden.net>.
 
 Released under the MIT license.
 
-Versioning indicates compatibility with AWS CDK major and minor versions. 1.5.x will be compatible with AWS CDK 1.5.x and so on.
+Versioning indicates compatibility with AWS CDK major and minor versions. 1.35.x will be compatible with
+AWS CDK 1.35.x and so on. AWS CDK has recently stabilized significantly and usually this module is compatible
+with the latest version.
 
 ## Overview
 
@@ -23,6 +25,29 @@ Use TypeScriptCode.asset('path/to/lambda-source-code') when creating a Lambda Fu
 
 The path that you provide should include at least a package.json file and a tsconfig.json file.
 
+## Options
+
+You can specify an optional options object as a second parameter to customize the npm install
+command or to copy additional files to the .deploy directory before deploying the Lambda function.
+
+The default npm install command is `npm install --production`.
+
+The source paths specified with copyFiles are relative to the source directory (given as the first parameter).
+The target paths specified with copyFiles are relative to the .deploy directory (Lambda root path).
+
+```typescript
+TypeScriptCode.asset('path/to/lambda-source-code', {
+  npmInstallCommand: 'npm',
+  npmInstallArguments: ['install', '--production'],
+  copyFiles: [{
+    sourcePath: 'data/file.dat', // relative to source path, can specify a single file only
+    targetPath: 'data/file.dat', // relative to .deploy path, can specify a single file only
+  }],
+})
+```
+
+## Example
+
 ```typescript
 import { Function } from '@aws-cdk/aws-lambda'
 import { TypeScriptCode } from '@clouden-cdk/aws-lambda-typescript'
@@ -31,7 +56,7 @@ const lambdaFunction = new Function(this, 'TestFunction', {
   functionName: 'test-function',
   code: TypeScriptCode.asset('path/to/lambda-source-code')),
   handler: 'handler.default',
-  runtime: lambda.Runtime.NODEJS_10_X,
+  runtime: lambda.Runtime.NODEJS_12_X,
 })
 ```
 
@@ -66,10 +91,11 @@ Here is an example tsconfig.json file that we use in Clouden projects like [webc
 
 ## Notes
 
-The TypeScript build involves two steps:
+The TypeScript build involves three steps:
 
 1. Run tsc to build the files in the source path and save output to the deploy path.
-2. Copy package.json and package-lock.json from the source path to the deploy path and run npm install --production there.
+2. Copy any additional files specified with copyFiles to the deploy path.
+3. Copy package.json and package-lock.json from the source path to the deploy path and run npm install --production there.
 
 The end result of these steps is that the deploy path contains everything needed to deploy the Lambda function.
 
