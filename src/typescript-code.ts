@@ -71,6 +71,7 @@ export class TypeScriptAssetCode extends AssetCode {
     const tscChild = child_process.spawnSync('npx', ['tsc', '--project', this.typeScriptSourcePath, '--outDir', this.path], {
       cwd: __dirname,
       stdio: 'inherit',
+      shell: true,
     })
     if (tscChild.error) {
       throw tscChild.error
@@ -88,9 +89,9 @@ export class TypeScriptAssetCode extends AssetCode {
       fs.copyFileSync(sourcePath, targetPath)
     }
 
-    function readFileSyncOrNull(filepath: string, encoding: string) {
+    function readFileSyncOrNull(filepath: string, encoding: 'utf8') {
       try {
-        return fs.readFileSync(filepath, encoding)
+        return fs.readFileSync(filepath, { encoding: encoding })
       } catch (err) {
         if (err.code === 'ENOENT') return null
         else throw err
@@ -107,7 +108,7 @@ export class TypeScriptAssetCode extends AssetCode {
     const oldPackageLockData = readFileSyncOrNull(pathModule.join(this.path, 'package-lock.json'), 'utf8')
     const oldPackageData = readFileSyncOrNull(pathModule.join(this.path, 'package.json'), 'utf8')
 
-    if (newPackageData && (newPackageData !== oldPackageData || newPackageLockData !== oldPackageLockData)) {
+    if (newPackageData && newPackageLockData && (newPackageData !== oldPackageData || newPackageLockData !== oldPackageLockData)) {
       // We have a package.json, and either package.json or package-lock.json has changed since last build, or no build done yet
       fs.writeFileSync(pathModule.join(this.path, 'package-lock.json'), newPackageLockData, 'utf8')
       fs.writeFileSync(pathModule.join(this.path, 'package.json'), newPackageData, 'utf8')
@@ -116,6 +117,7 @@ export class TypeScriptAssetCode extends AssetCode {
       const npmChild = child_process.spawnSync(this.typeScriptAssetCodeOptions.npmInstallCommand!, this.typeScriptAssetCodeOptions.npmInstallArguments, {
         cwd: this.path,
         stdio: 'inherit',
+	shell: true,
       })
       if (npmChild.error) {
         throw npmChild.error

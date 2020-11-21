@@ -1,6 +1,6 @@
 {
   "name": "@clouden-cdk/aws-lambda-typescript",
-  "version": "1.35.0",
+  "version": "1.74.0",
   "private": false,
   "description": "TypeScript Build Step for AWS CDK Lambda Functions",
   "main": "lib/typescript-code.js",
@@ -14,14 +14,14 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@aws-cdk/aws-lambda": "^1.35.0",
-    "@aws-cdk/core": "^1.35.0",
-    "@types/mkdirp": "^1.0.0",
-    "@types/node": "^13.13.4",
-    "aws-cdk": "^1.35.0"
+    "@aws-cdk/aws-lambda": "^1.74.0",
+    "@aws-cdk/core": "^1.74.0",
+    "@types/mkdirp": "^1.0.1",
+    "@types/node": "^14.14.9",
+    "aws-cdk": "^1.74.0"
   },
   "dependencies": {
     "mkdirp": "^1.0.4",
-    "typescript": "^3.8.3"
+    "typescript": "^4.1.2"
   }
 }
